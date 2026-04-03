@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Bird</title>
+  <style>
+    /* 配色：#F4D68C #7C9DD2 #D14C18 #673C33 #B2AB2B */
+    body {
+      font-family: Arial, "Yuanti SC", "STYuanti", "YouYuan", "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 16px;
+      min-width: 240px;
+      background: #F4D68C;
+      color: #673C33;
+      text-align: center;
+    }
+    p {
+      margin: 0 0 12px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    button {
+      width: 100%;
+      background: #D14C18;
+      color: #F4D68C;
+      border: 2px solid #D14C18;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: Arial, "Yuanti SC", "STYuanti", "YouYuan", "Microsoft YaHei", sans-serif;
+    }
+    button:hover { background: #673C33; border-color: #673C33; color: #F4D68C; }
+  </style>
+</head>
+<body>
+  <p id="hint"></p>
+  <button type="button" id="openOpt"></button>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Bird</title>
+  <style>
+    /*
+     * 主配色：#F4D68C #7C9DD2 #D14C18 #673C33 #B2AB2B（页面底色为白）
+     * 英文 Arial，中文圆体
+     */
+    * { box-sizing: border-box; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+    }
+    body {
+      font-family: Arial, "Yuanti SC", "STYuanti", "YouYuan", "Microsoft YaHei", sans-serif;
+      padding: 24px 16px 40px;
+      background: #ffffff;
+      color: #673C33;
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .page-wrap {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 20px;
+      color: #673C33;
+      font-weight: 700;
+    }
+    fieldset {
+      border: 2px dashed #7C9DD2;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 0 auto 16px;
+      background: #F4D68C;
+      text-align: center;
+      max-width: 100%;
+    }
+    legend {
+      font-weight: 700;
+      padding: 0 10px;
+      color: #673C33;
+    }
+    label {
+      display: block;
+      margin: 8px 0 4px;
+      font-weight: 600;
+      color: #673C33;
+      text-align: center;
+    }
+    input[type="text"],
+    input[type="password"],
+    select {
+      width: 100%;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      padding: 8px 10px;
+      border: 2px solid #7C9DD2;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Arial, "Yuanti SC", "STYuanti", "YouYuan", "Microsoft YaHei", sans-serif;
+      background: #F4D68C;
+      color: #673C33;
+    }
+    input::placeholder {
+      color: #B2AB2B;
+      opacity: 1;
+    }
+    .row { margin-bottom: 10px; }
+    .inline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 16px;
+    }
+    .inline label {
+      display: inline-flex;
+      align-items: center;
+      margin: 4px 0;
+      font-weight: 500;
+    }
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: #D14C18;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    button {
+      background: #D14C18;
+      color: #F4D68C;
+      border: 2px solid #D14C18;
+      padding: 10px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: Arial, "Yuanti SC", "STYuanti", "YouYuan", "Microsoft YaHei", sans-serif;
+    }
+    button.secondary {
+      background: #7C9DD2;
+      color: #F4D68C;
+      border-color: #7C9DD2;
+    }
+    button#clearBtn {
+      background: #B2AB2B;
+      color: #673C33;
+      border-color: #B2AB2B;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .hint {
+      font-size: 13px;
+      color: #673C33;
+      margin-top: 14px;
+      text-align: center;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 14px;
+      min-height: 1.2em;
+      text-align: center;
+    }
+    .ok { color: #B2AB2B; font-weight: 600; }
+    .err { color: #D14C18; font-weight: 600; }
+    fieldset p {
+      margin: 8px 0;
+      text-align: center;
+    }
+    fieldset strong { color: #673C33; }
+    #apiError {
+      font-size: 13px;
+      color: #D14C18;
+      margin: 6px auto 0;
+      max-width: 420px;
+      text-align: center;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <h1 data-i18n="optionsTitle">Echo Bird 设置</h1>
+
+    <fieldset>
+      <legend data-i18n="locale">界面语言</legend>
+      <div class="row inline">
+        <label><input type="radio" name="locale" value="zh" /> <span data-i18n="localeZh">中文</span></label>
+        <label><input type="radio" name="locale" value="en" /> <span data-i18n="localeEn">English</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="styleLabel">风格</legend>
+      <div class="row inline">
+        <label><input type="radio" name="style" value="philosophy" /> <span data-i18n="stylePhilosophy">哲理</span></label>
+        <label><input type="radio" name="style" value="funny" /> <span data-i18n="styleFunny">搞笑</span></label>
+        <label><input type="radio" name="style" value="abstract" /> <span data-i18n="styleAbstract">抽象</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="corner">小鸟位置</legend>
+      <div class="row inline">
+        <label><input type="radio" name="corner" value="br" /> <span data-i18n="cornerBr">右下</span></label>
+        <label><input type="radio" name="corner" value="bl" /> <span data-i18n="cornerBl">左下</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="walkModeLegend">遛鸟模式</legend>
+      <div class="row inline">
+        <label><input type="checkbox" id="walkMode" /> <span data-i18n="walkMode">遛鸟模式</span></label>
+      </div>
+      <p class="hint" style="margin-top: 8px" data-i18n="walkHint"></p>
+      <label for="apiKey" data-i18n="apiKey">API Key</label>
+      <input type="password" id="apiKey" autocomplete="off" />
+      <div id="apiError" aria-live="polite"></div>
+      <label for="baseUrl" data-i18n="baseUrl">Base URL</label>
+      <input type="text" id="baseUrl" placeholder="https://api.openai.com/v1" />
+      <label for="model" data-i18n="model">模型</label>
+      <input type="text" id="model" placeholder="gpt-4o-mini" />
+      <div class="actions">
+        <button type="button" class="secondary" id="testBtn" data-i18n="testConnection">测试连接</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="corpus">语料库</legend>
+      <p id="corpusStats"></p>
+      <button type="button" id="clearBtn" data-i18n="clearCorpus">清空</button>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" id="saveBtn" data-i18n="save">保存</button>
+    </div>
+    <div id="status"></div>
+    <p class="hint" data-i18n="privacyNote">隐私说明</p>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
